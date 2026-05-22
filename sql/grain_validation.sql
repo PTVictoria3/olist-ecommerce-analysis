@@ -63,3 +63,9 @@ SELECT product_category_name, COUNT(*) AS total_rows
 FROM category_translation
 GROUP BY product_category_name
 HAVING COUNT(*) > 1;
+
+-- 1 order có bao nhiêu customer_id?
+SELECT order_id, COUNT(customer_id) AS total_customers
+FROM orders
+GROUP BY order_id
+HAVING COUNT(customer_id) > 1;
