@@ -36,25 +36,6 @@ Olist là sàn e-commerce kết nối seller nhỏ với các marketplace lớn 
 
 **Nguồn:** [Brazilian E-Commerce Public Dataset by Olist (Kaggle)](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) — 8 bảng, ~99K đơn hàng, 2016–2018.
 
-```
-Kaggle CSV (8 bảng)
-   │
-   ▼  Python (pandas) — cleaning_copy.ipynb
-   │   • Chuẩn hóa datetime, strip text, xử lý null
-   │   • 1 order có nhiều review → giữ review mới nhất theo review_answer_timestamp
-   │   • Nạp vào SQL Server qua SQLAlchemy + pyodbc
-   ▼
-SQL Server — kpi_queries.sql
-   │   • Tạo view fact_orders: delay_days, promised_days, seller_processing_days,
-   │     shipping_days, total_value, main_seller (window function)
-   │   • Kiểm tra chất lượng: đếm dòng, keys giữa fact và dimension
-   │   • Truy vấn KPI: bucket độ trễ × review, phân rã trễ theo khâu,
-   │     Pareto tuyến (lọc n ≥ 30 tránh sai lệch thống kê), doanh thu rủi ro
-   ▼
-Power BI — dashboard 4 trang
-       Star schema: fact_orders + dim (customers, sellers, dim_date, geo_clean)
-       DAX measures riêng trong bảng Measure
-```
 
 ### Vòng đời một đơn hàng và vì sao chỉ phân tích đơn `delivered`
 
